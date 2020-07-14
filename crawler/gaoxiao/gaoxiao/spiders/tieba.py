@@ -1,6 +1,7 @@
 import datetime
 import json
 import csv
+import jieba
 
 import scrapy
 from urllib.parse import quote
@@ -54,6 +55,7 @@ class TiebaSpider(scrapy.Spider):
             if content:
                 article_info['content'] = content[0].get().strip()
             article_info['last_crawler_time'] = int(datetime.datetime.now().timestamp() * 1000)
+            article_info['seg_list'] = list(jieba.cut(f"{article_info['title']} {article_info.get('content')}", cut_all=False))
             article_id = article_info['id']
 
             school_club_data_coll.update({'article_id': article_id}, {"$set": article_info}, upsert=True)
