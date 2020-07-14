@@ -5,6 +5,14 @@
     <title>学校列表</title>
 </head>
 <body style="margin: 0;">
-<div></div>
+<div>
+    <ul>
+        {% for school_data in school_data_list %}
+        <li>
+            <a href="/school/{{school_data[0]}}">{{ school_data[0] }}（{{ school_data[1] }}）</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 </body>
 </html>
